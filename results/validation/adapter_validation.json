@@ -3,5 +3,12 @@
   "clients_checked": 100,
   "json_hdf5_equivalence": true,
   "per_client_split": "8 train / 2 validation",
-  "train_validation_indices_disjoint": true
+  "train_validation_indices_disjoint": true,
+  "indices_exhaustive": true,
+  "features_and_labels_follow_saved_indices": true,
+  "json_npy_equivalence": true,
+  "same_seed_repeat_equivalence": true,
+  "untrusted_object_npy_rejected": true,
+  "split_seed": 2026,
+  "course_data_read": false
 }

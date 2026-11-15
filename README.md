@@ -51,8 +51,11 @@ source .venv/bin/activate
 python -m pip install -r requirements-lock.txt
 python prepare_data.py --train /path/Assignment3-data/train_data.npy --test /path/Assignment3-data/test_data.npy --pixel-divisor 1 --trusted-course-npy --output data/prepared
 python validate.py --ray
+python validate_adapters.py
 python validate_course.py --data data/prepared
 python experiments.py train --data data/prepared --out results/course --rounds 120
+python validate_crosschecks.py
+python diagnostics.py
 python experiments.py test --data data/prepared --out results/course
 python plots.py --data data/prepared --results results/course
 python analysis.py --data data/prepared --results results
@@ -82,6 +85,8 @@ font. No retraining is needed to rebuild the PDF from retained figures/JSON.
 | `federated.py`, `prepare_data.py` | Model, local training, aggregation, Ray, splits and data adapters |
 | `experiments.py` | Validation-only sweeps and separate frozen test evaluation |
 | `validate.py`, `validate_course.py` | Synthetic prediction controls and real-data counterfactuals |
+| `validate_adapters.py`, `validate_crosschecks.py` | Complete reproduction of adapter/index checks and b=0 checkpoint/history equality |
+| `diagnostics.py` | Numerical analysis of early/late alignment, negative shares and update norms |
 | `plots.py`, `analysis.py`, `report.py` | Reproducible required/custom figures, tables and report |
 | `results/course/` | Configs, all round histories, client traces, participation, test results |
 | `results/course_controls/` | Label permutation, high-E and zero-rate experiments |
@@ -102,6 +107,33 @@ My custom alignment plot shows each client's cosine with the global update,
 colored by norm and sized by sample weight, for serial, Ray and noisy runs.
 Other diagnostics measure writer heterogeneity, participation and noisy pixels
 outside the clean domain. JSONL records include the first ten rounds.
+
+## Auxiliary validations and quantitative diagnostic analysis
+
+`python validate_adapters.py` creates its own temporary synthetic fixtures: 100
+clients, ten samples each, independent held-out fixture, LEAF JSON, TFF HDF5 and
+trusted object NPY formats. It checks exact arrays, labels and indices, disjoint
+and exhaustive 8/2 splits, same-seed repetition and explicit pickle trust. It
+writes `results/validation/adapter_validation.json`; no course data are needed.
+
+`python validate_crosschecks.py` compares all three C=.10/E=3 clean and b=0
+checkpoint pairs and all 121 saved metric points per pair. Counts, configs,
+dataset manifests, finite tensor values and exact parameter/history equality are
+checked. All errors are zero. Checkpoints are included in the local submission
+ZIP but excluded from GitHub: after a GitHub clone, first rerun the documented
+training command using the Canvas data. Neither auxiliary script reads course
+test images. Execution outputs are retained in `docs/execution/`.
+
+`python diagnostics.py` recomputes `results/nonstandard_diagnostics.json` and
+`.csv` from existing update logs, without checkpoints, course images or test
+access. It covers every retained run. The report adds a dedicated quantitative
+page: early rounds 1-10, late rounds 111-120, and the E=3/E=10 comparison at the
+same first-40-round horizon. Sample-weighted cosine is averaged across rounds;
+negative share is an unweighted fraction of selected updates; median norms are
+unscaled local parameter L2 norms. These are descriptive post-training summaries,
+not new model-selection criteria or causal tests. Comparing Ray C=.04 cosine
+with C=.10 directly is confounded by each client's self-contribution to its own
+aggregate; the serial/Ray equality check instead uses matched four-client runs.
 
 ## Privacy and experimental limits
 

@@ -10,7 +10,7 @@ algorithmic predictions; they are not merely file-format or installation tests.
 | No updates | E=0 and learning rate=0 preserve parameters; the real-data zero-rate trajectory must keep validation metrics fixed | `validate.py`; `validate_course.py`; `zero_lr/` |
 | Known learnable task | A separable two-class one-hot fixture should exceed .95 accuracy and lower validation loss in ten rounds through the actual FedAvg path | `validate.py`; explicitly synthetic results |
 | Laplace endpoints/moments | b=0 preserves inputs exactly; 100,000 Laplace(0,.2) draws should have mean 0 and variance .08 | `validate.py`; `laplace_moments` |
-| Real b=0 identity | Zero-noise and matching clean FedAvg checkpoints agree exactly under every seed | `course_crosschecks.json` and retained local checkpoints |
+| Real b=0 identity | Zero-noise and matching clean FedAvg checkpoints and all round metrics agree exactly under every seed | `python validate_crosschecks.py`; `course_crosschecks.json`; local ZIP checkpoints or reproduced training |
 | Serial/Ray parity | Matched data, initial state, selected writers, minibatches and seeds produce identical parameters/metric trajectories | `analysis.py`; `report_metrics.json`; `ray_parity.png` |
 | Real concurrency | Actor start/finish intervals actually overlap; record observed concurrency rather than assume it from API names | Client JSONL timestamps and `report_metrics.json` |
 | Label permutation | Shuffling labels inside each writer destroys image-label association but preserves local label histograms; clean validation should fall far below normal learning, not necessarily to 1/62 | `python validate_course.py --data data/prepared`; `shuffled_labels/` |
@@ -49,3 +49,26 @@ and clean metric releases are not privatized, and pixel noise alone does not
 establish user-level DP. Public reproducibility seeds are not secret privacy
 randomness. The report proposes additional splits/seeds, equal-budget studies,
 missing-client stress, calibrated privacy accounting and fresh test data.
+
+## Complete auxiliary reproduction and diagnostic summaries
+
+Run `python validate_adapters.py` for all synthetic JSON/HDF5/NPY, exact indexing,
+8/2 split and deterministic repetition checks. Run `python validate_crosschecks.py`
+after training (or from the local ZIP with weights) to reproduce the three
+b=0/clean parameter and 121-point history comparisons. Both write their full
+results under `results/validation/`; their execution logs are in `docs/execution/`.
+The adapter tests are supplementary data checks, not a replacement for the
+algorithmic identities and real-label counterfactual in this guide.
+
+Run `python diagnostics.py` for the exact numbers underlying the report's new
+quantitative page. It needs only saved JSONL and exports JSON plus CSV for every
+retained run. It fixes windows to the first/last ten rounds and, where available,
+the first 40 rounds for the E stress comparison. Formula definitions and limits
+are stored with the JSON. It neither selects models nor opens test images.
+
+The sample-weighted mean cosine is a mean across rounds of the weighted client
+cosines; the negative-update fraction counts selected updates equally. The output
+also retains sample-weighted negative shares, p90 norms and zero-norm counts.
+Ray/serial matched four-client summaries should agree exactly. Higher cosine
+across different client counts is not a systems or accuracy improvement, and a
+larger norm with higher E is not in itself evidence of harmful drift.
