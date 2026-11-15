@@ -1,0 +1,16 @@
+{
+  "part1_data_distribution": "report page 2, class_distributions.png",
+  "part1_80_20_and_curves": "report pages 2-4, each run history and plots",
+  "part1_C10_percent": "selected baseline C0.1 and full noise sweep",
+  "part1_compare_C_E": "four combinations, three seeds, page 4",
+  "part1_heldout_test": "frozen test records and page 1",
+  "ray_four_actors_resources": "federated.py; pages 5 and 11",
+  "ray_train_val_curves_and_test": "page 5",
+  "part2_laplace_fixed_datasets": "pages 9-12; five scales, three seeds",
+  "part2_noise_accuracy_plot": "page 9",
+  "part2_scale_choice": "b0.3 by validation utility rule, pages 9 and 12",
+  "each_part_nonstandard_plot": "pages 8,10,11",
+  "edge_cases_and_quantitative_tests": "pages 3,5-8,10-12 and docs/VALIDATION.md",
+  "three_more_months": "page 13",
+  "github_and_reproduction": "pages 1 and 14"
+}

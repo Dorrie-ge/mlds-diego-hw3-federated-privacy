@@ -1,0 +1,128 @@
+{
+  "selection_uses": "final validation accuracy only, before any test evaluation",
+  "baseline_sweep": [
+    {
+      "fraction": 0.04,
+      "epochs": 1,
+      "mean_validation": 0.32287602101867746,
+      "runs": [
+        "fedavg_C0.04_E1_s17",
+        "fedavg_C0.04_E1_s29",
+        "fedavg_C0.04_E1_s43"
+      ]
+    },
+    {
+      "fraction": 0.04,
+      "epochs": 3,
+      "mean_validation": 0.4284896727537589,
+      "runs": [
+        "fedavg_C0.04_E3_s17",
+        "fedavg_C0.04_E3_s29",
+        "fedavg_C0.04_E3_s43"
+      ]
+    },
+    {
+      "fraction": 0.1,
+      "epochs": 1,
+      "mean_validation": 0.3630924509650903,
+      "runs": [
+        "fedavg_C0.1_E1_s17",
+        "fedavg_C0.1_E1_s29",
+        "fedavg_C0.1_E1_s43"
+      ]
+    },
+    {
+      "fraction": 0.1,
+      "epochs": 3,
+      "mean_validation": 0.5292648665522085,
+      "runs": [
+        "fedavg_C0.1_E3_s17",
+        "fedavg_C0.1_E3_s29",
+        "fedavg_C0.1_E3_s43"
+      ]
+    }
+  ],
+  "chosen_baseline": {
+    "fraction": 0.1,
+    "epochs": 3,
+    "mean_validation": 0.5292648665522085,
+    "runs": [
+      "fedavg_C0.1_E3_s17",
+      "fedavg_C0.1_E3_s29",
+      "fedavg_C0.1_E3_s43"
+    ]
+  },
+  "noise_sweep": [
+    {
+      "scale": 0.0,
+      "mean_validation": 0.5292648665522085,
+      "runs": [
+        "noise_b0.0_s17",
+        "noise_b0.0_s29",
+        "noise_b0.0_s43"
+      ]
+    },
+    {
+      "scale": 0.05,
+      "mean_validation": 0.5150096248894438,
+      "runs": [
+        "noise_b0.05_s17",
+        "noise_b0.05_s29",
+        "noise_b0.05_s43"
+      ]
+    },
+    {
+      "scale": 0.1,
+      "mean_validation": 0.5292128401227824,
+      "runs": [
+        "noise_b0.1_s17",
+        "noise_b0.1_s29",
+        "noise_b0.1_s43"
+      ]
+    },
+    {
+      "scale": 0.3,
+      "mean_validation": 0.5243743821861506,
+      "runs": [
+        "noise_b0.3_s17",
+        "noise_b0.3_s29",
+        "noise_b0.3_s43"
+      ]
+    },
+    {
+      "scale": 1.0,
+      "mean_validation": 0.3659018781541023,
+      "runs": [
+        "noise_b1.0_s17",
+        "noise_b1.0_s29",
+        "noise_b1.0_s43"
+      ]
+    }
+  ],
+  "chosen_noise_scale": 0.3,
+  "noise_utility_tolerance": 0.02,
+  "ray_runs": [
+    "ray_k4_s17"
+  ],
+  "test_runs": [
+    "fedavg_C0.1_E3_s17",
+    "fedavg_C0.1_E3_s29",
+    "fedavg_C0.1_E3_s43",
+    "noise_b0.0_s17",
+    "noise_b0.0_s29",
+    "noise_b0.0_s43",
+    "noise_b0.05_s17",
+    "noise_b0.05_s29",
+    "noise_b0.05_s43",
+    "noise_b0.1_s17",
+    "noise_b0.1_s29",
+    "noise_b0.1_s43",
+    "noise_b0.3_s17",
+    "noise_b0.3_s29",
+    "noise_b0.3_s43",
+    "noise_b1.0_s17",
+    "noise_b1.0_s29",
+    "noise_b1.0_s43",
+    "ray_k4_s17"
+  ]
+}

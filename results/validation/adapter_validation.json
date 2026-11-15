@@ -1,0 +1,7 @@
+{
+  "data_kind": "synthetic adapter controls, not course data",
+  "clients_checked": 100,
+  "json_hdf5_equivalence": true,
+  "per_client_split": "8 train / 2 validation",
+  "train_validation_indices_disjoint": true
+}

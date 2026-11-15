@@ -1,0 +1,16 @@
+{
+  "source": "Canvas course Files/Assignments/Assignment3-data.zip",
+  "course_id": 259280,
+  "canvas_file_id": 26047396,
+  "downloaded_client_date": "2026-11-14",
+  "archive_sha256": "dfafb66b18f2f1d1814c499e920e9129c37a358c6d4ef08ec0b196a2add2bc05",
+  "raw_files_sha256": {
+    "train_data.npy": "9afa6ee4eff168daf080e73381fb6392ade8f970daf4392183f4c1f6c7db4aec",
+    "test_data.npy": "0df3082c14f7b62f6f5a264181fd7a243533f9463562f5986addf2f80b4060b2",
+    "README.txt": "818eafdee49df7429ef1b07f8b1c4b1bd582c1b3b3215c75ebbd6a3695b3a732"
+  },
+  "raw_data_published": false,
+  "format": "official NPY object arrays, 100 training clients; 1 aggregated held-out test array",
+  "train_and_val_samples": 31825,
+  "test_samples": 3621
+}

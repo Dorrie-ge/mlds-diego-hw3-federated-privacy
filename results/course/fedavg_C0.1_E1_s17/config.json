@@ -1,0 +1,13 @@
+{
+  "seed": 17,
+  "rounds": 120,
+  "fraction": 0.1,
+  "epochs": 1,
+  "lr": 0.05,
+  "batch_size": 32,
+  "noise": 0.0,
+  "backend": "serial",
+  "device": "cpu",
+  "cpus": 4,
+  "gpu_per_actor": 0.0
+}

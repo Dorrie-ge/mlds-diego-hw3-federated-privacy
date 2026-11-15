@@ -1,0 +1,71 @@
+round=000 train=0.0000 val=0.0000
+round=001 train=0.5025 val=0.4900
+round=002 train=0.5025 val=0.4900
+round=003 train=1.0000 val=1.0000
+round=004 train=1.0000 val=1.0000
+round=005 train=1.0000 val=1.0000
+round=006 train=1.0000 val=1.0000
+round=007 train=1.0000 val=1.0000
+round=008 train=1.0000 val=1.0000
+round=009 train=1.0000 val=1.0000
+round=010 train=1.0000 val=1.0000
+round=000 train=0.4975 val=0.5100
+round=001 train=0.4975 val=0.5100
+2026-11-14 18:23:19,521	WARNING authentication_token_setup.py:85 -- Token authentication is enabled for this Ray cluster. Set RAY_AUTH_MODE=disabled to opt out. For more information, see https://docs.ray.io/en/latest/ray-security/token-auth.html
+2026-11-14 18:23:22,028	INFO worker.py:2038 -- Started a local Ray instance.
+round=000 train=0.4975 val=0.5100
+round=001 train=0.4975 val=0.5100
+{
+  "data_kind": "synthetic algorithm controls, NOT course EMNIST results",
+  "unequal_client_weighting": {
+    "observed": 8.0,
+    "expected": 8.0,
+    "incorrect_unweighted": 6.0
+  },
+  "full_batch_gradient_identity": {
+    "max_abs_error": 7.450580596923828e-09,
+    "tolerance": 1e-06
+  },
+  "laplace_moments": {
+    "sample_size": 100000,
+    "mean": 0.0007028420804999769,
+    "variance": 0.08042607456445694,
+    "expected_mean": 0.0,
+    "expected_variance": 0.08
+  },
+  "b_zero_identity": true,
+  "zero_updates": {
+    "E_zero_error": 0.0,
+    "lr_zero_error": 0.0
+  },
+  "separable_task": {
+    "initial": {
+      "round": 0,
+      "train_loss": 4.153352017402649,
+      "train_accuracy": 0.0,
+      "val_loss": 4.154507899284363,
+      "val_accuracy": 0.0,
+      "train_clean_loss": 4.153352017402649,
+      "train_clean_accuracy": 0.0,
+      "val_client_p10": 0.0
+    },
+    "final": {
+      "round": 10,
+      "train_loss": 0.0490926443785429,
+      "train_accuracy": 1.0,
+      "val_loss": 0.049088874273002146,
+      "val_accuracy": 1.0,
+      "train_clean_loss": 0.0490926443785429,
+      "train_clean_accuracy": 1.0,
+      "val_client_p10": 1.0
+    },
+    "prediction": "accuracy > .95 and lower validation loss after 10 rounds"
+  },
+  "heldout_test_not_read": true,
+  "ray_serial_equivalence": {
+    "max_abs_error": 0.0,
+    "tolerance": 1e-06,
+    "selected_clients": 4
+  },
+  "ray_observed_peak_overlapping_updates": 4
+}

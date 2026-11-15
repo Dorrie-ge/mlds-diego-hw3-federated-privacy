@@ -1,0 +1,6 @@
+numpy>=2.0,<3
+torch>=2.5,<3
+ray==2.60.0
+h5py>=3.10,<4
+matplotlib>=3.9,<4
+reportlab>=4,<5

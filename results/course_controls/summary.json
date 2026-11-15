@@ -1,0 +1,27 @@
+{
+  "negative_control": "training labels shuffled within each client; validation unchanged",
+  "shuffled_final": {
+    "round": 120,
+    "train_loss": 3.7304825848435255,
+    "train_accuracy": 0.05759697851915965,
+    "val_loss": 3.734897922535517,
+    "val_accuracy": 0.05915405025753082,
+    "train_clean_loss": 3.7304825848435255,
+    "train_clean_accuracy": 0.05759697851915965,
+    "val_client_p10": 0.023951219512195126,
+    "seconds": 0.1296253204345703
+  },
+  "large_E_final": {
+    "round": 40,
+    "train_loss": 1.7865116876681264,
+    "train_accuracy": 0.5262805885592887,
+    "val_loss": 1.799572278542695,
+    "val_accuracy": 0.5186514749492742,
+    "train_clean_loss": 1.7865116876681264,
+    "train_clean_accuracy": 0.5262805885592887,
+    "val_client_p10": 0.3813636363636364,
+    "seconds": 0.25862669944763184
+  },
+  "zero_lr_validation_invariant": true,
+  "test_data_used": false
+}

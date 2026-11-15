@@ -1,0 +1,14 @@
+{
+  "b_zero_matches_clean_baseline_exactly": true,
+  "max_parameter_errors_by_seed": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "test_data_used": false
+}

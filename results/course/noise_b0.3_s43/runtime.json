@@ -1,0 +1,8 @@
+{
+  "started_unix": 1794703165.303275,
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "torch": "2.14.1",
+  "numpy": "2.5.4",
+  "source_sha256": "2e1ec0ed84f6ae78ecec95ae172abb61d55c510051bcce64b43b9325d34bd344",
+  "finished_unix": 1794703180.997806
+}
