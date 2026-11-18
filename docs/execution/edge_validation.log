@@ -1,0 +1,88 @@
+{
+  "data_kind": "synthetic boundary fixtures, NOT course accuracy",
+  "executed_on": "2026-11-18",
+  "runtime": {
+    "python": "3.12.14",
+    "torch": "2.14.1",
+    "numpy": "2.5.4"
+  },
+  "source_sha256": {
+    "federated.py": "2e1ec0ed84f6ae78ecec95ae172abb61d55c510051bcce64b43b9325d34bd344",
+    "prepare_data.py": "b0e3baf92dafc3373cca862c8ca386527db7c1c771e09436615b858fb0bcde82",
+    "validate_edges.py": "e77dbdd8539a8a4564c7e87785f9e7ca4b9f6b1c11bfb68f0aa6c403280d7830"
+  },
+  "test_data_used": false,
+  "all_passed": true,
+  "checks": [
+    {
+      "case": "Missing local classes",
+      "method": "Train and evaluate a writer containing only label 61",
+      "expected": "Keep 62 logits; finite, nonzero update and finite validation loss",
+      "observed": "PASS: 62 logits; finite changed parameters; 2 validation samples",
+      "passed": true
+    },
+    {
+      "case": "Final short minibatch",
+      "method": "Observe actual loss-call batch sizes for n=33, batch=32, E=1",
+      "expected": "Two SGD steps; batches [32,1]; all 33 samples retained",
+      "observed": "PASS: batches [32, 1]; steps=2; n=33",
+      "passed": true
+    },
+    {
+      "case": "Smallest accepted client",
+      "method": "Prepare n=2 using the production loader",
+      "expected": "One training and one validation sample; disjoint and exhaustive",
+      "observed": "PASS: 1/1 split; indices disjoint and exhaustive",
+      "passed": true
+    },
+    {
+      "case": "Too-small client",
+      "method": "Prepare n=1 with the production loader",
+      "expected": "Reject with ValueError",
+      "observed": "PASS: ValueError",
+      "passed": true
+    },
+    {
+      "case": "Invalid labels",
+      "method": "Prepare labels -1, 62 and 0.5 separately",
+      "expected": "Reject all three with ValueError",
+      "observed": "PASS: 3/3 rejected",
+      "passed": true
+    },
+    {
+      "case": "Invalid clean pixels",
+      "method": "Prepare pixels -0.01, 1.01, NaN and infinity",
+      "expected": "Reject all four with ValueError",
+      "observed": "PASS: 4/4 rejected",
+      "passed": true
+    },
+    {
+      "case": "Participation limits",
+      "method": "Validate C=0,0.11,0.001 and valid endpoints 0.01,0.1 for 100 clients",
+      "expected": "Reject three invalid settings; accept both valid endpoints",
+      "observed": "PASS: 3 rejected; 2 accepted",
+      "passed": true
+    },
+    {
+      "case": "Invalid aggregation",
+      "method": "Empty states, unequal lengths, zero and negative counts",
+      "expected": "Reject all four with ValueError",
+      "observed": "PASS: 4/4 rejected",
+      "passed": true
+    },
+    {
+      "case": "Invalid noise scale",
+      "method": "b=-0.1, NaN and infinity",
+      "expected": "Reject all three with ValueError",
+      "observed": "PASS: 3/3 rejected",
+      "passed": true
+    },
+    {
+      "case": "Noise endpoints",
+      "method": "b=0 bitwise identity; b=0.3 on 10,000 zero pixels",
+      "expected": "Exact identity at zero; positive scale remains unclipped outside [0,1]",
+      "observed": "PASS: exact identity; values below 0 and above 1 retained",
+      "passed": true
+    }
+  ]
+}

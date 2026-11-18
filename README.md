@@ -52,6 +52,7 @@ python -m pip install -r requirements-lock.txt
 python prepare_data.py --train /path/Assignment3-data/train_data.npy --test /path/Assignment3-data/test_data.npy --pixel-divisor 1 --trusted-course-npy --output data/prepared
 python validate.py --ray
 python validate_adapters.py
+python validate_edges.py
 python validate_course.py --data data/prepared
 python experiments.py train --data data/prepared --out results/course --rounds 120
 python validate_crosschecks.py
@@ -119,9 +120,9 @@ writes `results/validation/adapter_validation.json`; no course data are needed.
 `python validate_crosschecks.py` compares all three C=.10/E=3 clean and b=0
 checkpoint pairs and all 121 saved metric points per pair. Counts, configs,
 dataset manifests, finite tensor values and exact parameter/history equality are
-checked. All errors are zero. Checkpoints are included in the local submission
-ZIP but excluded from GitHub: after a GitHub clone, first rerun the documented
-training command using the Canvas data. Neither auxiliary script reads course
+checked. All errors are zero. Checkpoints are excluded from GitHub. After a fresh clone, obtain the course
+data from Canvas and first run the documented training command. No separate
+checkpoint download is required or assumed. Neither auxiliary script reads course
 test images. Execution outputs are retained in `docs/execution/`.
 
 `python diagnostics.py` recomputes `results/nonstandard_diagnostics.json` and
@@ -153,3 +154,17 @@ establish convergence or state-of-the-art performance; full Ray uses one seed.
 - [PyTorch reproducibility](https://docs.pytorch.org/docs/stable/notes/randomness.html)
 - [Dwork and Roth, differential privacy](https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf)
 - Caldas et al., LEAF: A Benchmark for Federated Settings, arXiv:1812.01097 (2018)
+
+## Boundary-case evidence added November 18, 2026
+
+Run `python validate_edges.py` without course data or checkpoints. Appendix A of
+the revised PDF lists ten executed boundary controls with the test method,
+expected behavior and measured result. Full machine-readable observations and
+source hashes are in `results/validation/edge_validation.json`; the execution
+log is `docs/execution/edge_validation.log`. The cases cover missing classes,
+short minibatches, two-sample and one-sample clients, invalid labels/pixels,
+participation limits, invalid aggregation counts, and noise boundaries.
+
+This revision reruns the adapter checks and the three retained clean/b=0
+checkpoint comparisons. It does not rerun the complete course training sweep.
+Original training and evaluation records remain dated November 14, 2026.

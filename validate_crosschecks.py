@@ -24,7 +24,7 @@ def validate(course,output):
         assert load(noisy/'data_manifest.json')==load(clean/'data_manifest.json')
         paths=[clean/'final.pt',noisy/'final.pt']
         if not all(p.exists() for p in paths):
-            raise FileNotFoundError('Checkpoint files are excluded from GitHub. Use the local submission ZIP or reproduce experiments.py train with the course data.')
+            raise FileNotFoundError('Checkpoint files are excluded from GitHub. First run experiments.py train with the Canvas course data, as documented in README.')
         a,b=[torch.load(p,map_location='cpu',weights_only=True) for p in paths]
         assert set(a)==set(b)
         for key in a:

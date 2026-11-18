@@ -3,3 +3,7 @@ __pycache__/
 data/
 *.pt
 .DS_Store
+*.pth
+*.ckpt
+*.safetensors
+checkpoints/

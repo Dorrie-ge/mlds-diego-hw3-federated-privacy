@@ -10,7 +10,7 @@ algorithmic predictions; they are not merely file-format or installation tests.
 | No updates | E=0 and learning rate=0 preserve parameters; the real-data zero-rate trajectory must keep validation metrics fixed | `validate.py`; `validate_course.py`; `zero_lr/` |
 | Known learnable task | A separable two-class one-hot fixture should exceed .95 accuracy and lower validation loss in ten rounds through the actual FedAvg path | `validate.py`; explicitly synthetic results |
 | Laplace endpoints/moments | b=0 preserves inputs exactly; 100,000 Laplace(0,.2) draws should have mean 0 and variance .08 | `validate.py`; `laplace_moments` |
-| Real b=0 identity | Zero-noise and matching clean FedAvg checkpoints and all round metrics agree exactly under every seed | `python validate_crosschecks.py`; `course_crosschecks.json`; local ZIP checkpoints or reproduced training |
+| Real b=0 identity | Zero-noise and matching clean FedAvg checkpoints and all round metrics agree exactly under every seed | `python validate_crosschecks.py`; `course_crosschecks.json`; checkpoints reproduced by training |
 | Serial/Ray parity | Matched data, initial state, selected writers, minibatches and seeds produce identical parameters/metric trajectories | `analysis.py`; `report_metrics.json`; `ray_parity.png` |
 | Real concurrency | Actor start/finish intervals actually overlap; record observed concurrency rather than assume it from API names | Client JSONL timestamps and `report_metrics.json` |
 | Label permutation | Shuffling labels inside each writer destroys image-label association but preserves local label histograms; clean validation should fall far below normal learning, not necessarily to 1/62 | `python validate_course.py --data data/prepared`; `shuffled_labels/` |
@@ -54,7 +54,7 @@ missing-client stress, calibrated privacy accounting and fresh test data.
 
 Run `python validate_adapters.py` for all synthetic JSON/HDF5/NPY, exact indexing,
 8/2 split and deterministic repetition checks. Run `python validate_crosschecks.py`
-after training (or from the local ZIP with weights) to reproduce the three
+after the documented training command to reproduce the three
 b=0/clean parameter and 121-point history comparisons. Both write their full
 results under `results/validation/`; their execution logs are in `docs/execution/`.
 The adapter tests are supplementary data checks, not a replacement for the
@@ -72,3 +72,17 @@ also retains sample-weighted negative shares, p90 norms and zero-norm counts.
 Ray/serial matched four-client summaries should agree exactly. Higher cosine
 across different client counts is not a systems or accuracy improvement, and a
 larger norm with higher E is not in itself evidence of harmful drift.
+
+## Executed boundary tests (November 18, 2026 revision)
+
+`python validate_edges.py` directly exercises the production implementation
+using synthetic fixtures. The report's Appendix A lists each case, test method,
+expected behavior and measured result. See
+`results/validation/edge_validation.json` and
+`docs/execution/edge_validation.log` for runtime versions, source hashes, and
+full observations. No course data or trained checkpoints are required.
+
+GitHub does not contain checkpoint binaries. On a fresh clone, run
+`python experiments.py train --data data/prepared --out results/course --rounds 120`
+with the Canvas data before `python validate_crosschecks.py`. The reproduction
+sequence does not assume an external checkpoint download.
